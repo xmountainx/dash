@@ -4,6 +4,7 @@
 
   vars:
     dev_env_dir: /usr/local/dev-env
+    docker_args: --virtualbox-cpu-count 2 --virtualbox-memory 4096 
 
   tasks:
 
@@ -80,4 +81,4 @@
     when: ansible_env.SHELL == "/bin/bash"
 
   - name: Create Docker Machine Revised
-    command: "{{dev_env_dir}}/bin/dev machine create --virtualbox-memory 4096 creates=~/.docker/machine/machines/dev/config.json"
+    command: "{{dev_env_dir}}/bin/dev machine create {{docker_args}} creates=~/.docker/machine/machines/dev/config.json"
