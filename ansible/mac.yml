@@ -79,5 +79,5 @@
       create=yes
     when: ansible_env.SHELL == "/bin/bash"
 
-  - name: Create Docker Machine
-    command: "{{dev_env_dir}}/bin/dev machine create creates=~/.docker/machine/machines/dev/config.json"
+  - name: Create Docker Machine Revised
+    command: "{{dev_env_dir}}/bin/dev machine create --virtualbox-memory 4096 creates=~/.docker/machine/machines/dev/config.json"

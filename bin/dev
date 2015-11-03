@@ -76,10 +76,20 @@ HEREDOC
     elsif args[0] == 'resume'
       system('VBoxManage startvm dev --type headless')
     elsif args[0] == 'create'
-      system('docker-machine create --driver virtualbox dev')
-      system('docker-machine scp /usr/local/dev-env/docker/bootsync.sh dev:/tmp/bootsync.sh')
-      system('docker-machine ssh dev "sudo mv /tmp/bootsync.sh /var/lib/boot2docker/bootsync.sh"')
-      system('docker-machine restart dev')
+
+      puts args.join(' ')
+
+      args.shift();
+      args.unshift('docker-machine', 'create', 'dev', '--driver', 'virtualbox')
+      
+      puts 'After'
+      puts args.join(' ')
+      system(args.join(' '))
+
+      # system('docker-machine create --driver virtualbox dev')
+      # system('docker-machine scp /usr/local/dev-env/docker/bootsync.sh dev:/tmp/bootsync.sh')
+      # system('docker-machine ssh dev "sudo mv /tmp/bootsync.sh /var/lib/boot2docker/bootsync.sh"')
+      # system('docker-machine restart dev')
     else
       args.push('dev') unless ["ls", "help", "active", "create", "scp"].include?(args[0])
       args.unshift('docker-machine')
@@ -88,7 +98,7 @@ HEREDOC
   end
 
   def update(args)
-    system('cd /usr/local/dev-env && git fetch && git reset --hard origin/master')
+#    system('cd /usr/local/dev-env && git fetch && git reset --hard origin/master')
     system('ansible-playbook /usr/local/dev-env/ansible/mac.yml -i 127.0.0.1, --ask-become-pass')
   end
 
