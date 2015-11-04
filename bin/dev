@@ -87,9 +87,9 @@ HEREDOC
       system(args.join(' '))
 
       # system('docker-machine create --driver virtualbox dev')
-      # system('docker-machine scp /usr/local/dev-env/docker/bootsync.sh dev:/tmp/bootsync.sh')
-      # system('docker-machine ssh dev "sudo mv /tmp/bootsync.sh /var/lib/boot2docker/bootsync.sh"')
-      # system('docker-machine restart dev')
+      system('docker-machine scp /usr/local/dev-env/docker/bootsync.sh dev:/tmp/bootsync.sh')
+      system('docker-machine ssh dev "sudo mv /tmp/bootsync.sh /var/lib/boot2docker/bootsync.sh"')
+      system('docker-machine restart dev')
     else
       args.push('dev') unless ["ls", "help", "active", "create", "scp"].include?(args[0])
       args.unshift('docker-machine')
